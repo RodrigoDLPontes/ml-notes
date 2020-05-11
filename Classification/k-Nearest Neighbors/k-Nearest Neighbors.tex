@@ -1,0 +1,47 @@
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage[margin=1in]{geometry}
+\newcommand{\x}{\cdot}
+\newcommand{\eval}[3]{\left.#1\right\rvert_{#2}^{#3}}
+\newcommand{\nroot}[2]{\sqrt[\leftroot{-1}\uproot{1}#1]{#2}}
+\newcommand{\paren}[1]{\left(#1\right)}
+\newcommand{\braks}[1]{\left[#1\right]}
+\newcommand{\curly}[1]{\left\{#1\right\}}
+\newcommand{\norm}[1]{\lVert#1\rVert}
+\newcommand{\inner}[2]{\langle#1,#2\rangle}
+\newcommand{\argmax}[1]{\underset{#1}{\operatorname{arg\,max\,}}}
+\newcommand{\argmin}[1]{\underset{#1}{\operatorname{arg\,min\,}}}
+
+\begin{document}
+
+\begin{center}
+	\LARGE{$k$-Nearest Neighbors}
+\end{center}
+
+\section{Hypothesis}
+
+Consider the domain $\mathcal{X} = \mathbb{R}^D$ and the codomain  $\mathcal{Y} =[1, M]$. In $k$-Nearest Neighbors classification, our hypothesis $h_{k,d} : \mathcal{X} \rightarrow \mathcal{Y}$ is defined by the most common category from the $k$ nearest training points in $S$ determined with the distance function $d$. As such, $k$-Nearest Neighbors doesn't require any training (it is non-parametric): it simply classifies new points based on the training dataset $S$. However,  there are hyperparameters that can be tuned, such as picking a distance function $d$ or choosing $k$ itself.
+
+\section{Choosing $k$}
+
+Larger values for $k$ smooth out  boundaries and increase training error, while smaller values make boundaries more complex and increase training error, possibly inducing overfitting.
+
+\section{Distance functions}
+
+Below are some popular distance functions that can be used:
+\begin{itemize}
+	\item \textbf{Euclidean distance:} regular geometric distance. Is given by
+	\[ d_\text{euc}(\mathbf{x}, \mathbf{x}') = \sqrt{\sum_{i=1}^D(x^{(i)} - x'^{(i)})^2} = ((\mathbf{x} - \mathbf{x}')^\top(\mathbf{x} - \mathbf{x}'))^\frac{1}{2} \]
+	\item \textbf{Manhattan distance:} sum of absolute distances of Cartesian coordinates; can be thought of as the distance from navigating city blocks in Manhattan. Is given by
+	\[ d_\text{man}(\mathbf{x}, \mathbf{x}') = \sum_{i=1}^{D}|x^{(i)} - x'^{(i)}| \]
+	\item \textbf{Chebyshev distance:} also known as chessboard distance; greatest distance along any coordinate dimension. Is given by
+	\[ d_\text{max}(\mathbf{x}, \mathbf{x}') = \max_i(|x^{(i)} - x'^{(i)}|) \]
+	\item \textbf{$p$-norm:} generalization of the previous distances (norms). Is given by
+	\[ d_p(\mathbf{x}, \mathbf{x}') = \paren{\sum_{i=1}^D|x^{(i)} - x'^{(i)}|^p}^\frac{1}{p} \]
+\end{itemize}
+
+\end{document}
+

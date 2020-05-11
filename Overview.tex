@@ -1,0 +1,102 @@
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage[margin=1in]{geometry}
+\newcommand{\x}{\cdot}
+\newcommand{\eval}[3]{\left.#1\right\rvert_{#2}^{#3}}
+\newcommand{\nroot}[2]{\sqrt[\leftroot{-1}\uproot{1}#1]{#2}}
+\newcommand{\paren}[1]{\left(#1\right)}
+\newcommand{\braks}[1]{\left[#1\right]}
+\newcommand{\curly}[1]{\left\{#1\right\}}
+\newcommand{\inner}[2]{\langle#1,#2\rangle}
+
+\begin{document}
+
+\begin{center}
+		\LARGE{Overview}
+\end{center}
+
+\section{Regression}
+
+Set of statistical processes for estimating the relationship between a dependent variable (also called the ``outcome variable") and one or more independent variables (also called ``predictors", ``covariates" or ``features"). Usually related to continuous variables.
+\\\newline
+\textbf{Algorithms:}
+\begin{itemize}
+	\item \textbf{Linear Regression:} establishes linear function from features to the outcome variable
+	\item \textbf{Linear Regression with Basis Function Expansion:} generalizes hypothesis class of linear regression to include any function while applying similar techniques
+\end{itemize}
+
+\section{Classification}
+
+The problem of identifying to which category an observation belongs, based on training data whose categories are known. Can also be thought of as partitioning the feature space into categories.
+\\\newline
+\textbf{Algorithms:}
+\begin{itemize}
+	\item \textbf{$k$-Nearest Neighbors:} classifies data points based on the most common category from the $k$ nearest training points
+	\item \textbf{Decision Trees:} partitions feature space by creating a tree with decisions at each node and labels at the leafs
+	\item \textbf{Logistic Regression:} fits a logistic function to the data to obtain a hyperplane that divides the feature space
+	\item \textbf{Support Vector Machines:} finds hyperplane that divides the feature space with the largest margin to data points
+	\item \textbf{Naive Bayes:} models probabilities of attributes to find probability of label using Bayes rule
+\end{itemize}
+
+\section{Ensemble Learning}
+
+\begin{itemize}
+	\item \textbf{Bagging:}
+	\item \textbf{Boosting:}
+\end{itemize}
+
+\section{Feature Transformation}
+
+\begin{itemize}
+	\item \textbf{Feature selection:}
+	\item \textbf{PCA:}
+\end{itemize}
+
+\section{Unsupervised Learning}
+
+\begin{itemize}
+	\item \textbf{Clustering:} find compact representation of data by partitioning it into groups or clusters
+\end{itemize}
+
+\section{Optimization}
+
+\begin{itemize}
+	\item \textbf{Gradient Descent:}
+	\item \textbf{Stochastic Gradient Descent:}
+	\item \textbf{Genetic Algorithms:}
+\end{itemize}
+
+\section{Miscellaneous}
+
+\begin{itemize}
+	\item \textbf{``Bayesian Learning"\emph{}:} usage of Bayes rule to analyze which hypothesis from a hypothesis class is the most likely; probabilities of hypotheses and their relationship with the hypothesis ``length"; and the derivation of the Bayes Optimal Classifier
+	\item \textbf{Bayes Nets:} graphs of conditional dependencies between random variables
+	\item \textbf{Distance functions:}
+\end{itemize}
+
+\section{To Do}
+
+\begin{itemize}
+	\item Distance functions
+	\item Bagging
+	\item Boosting
+	\item Bayes Nets
+	\item Feature selection
+	\item PCA
+	\item Gradient Descent
+	\item Stochastic Gradient Descent
+	\item Hill Climbing
+	\item Simulated Annealing
+	\item Genetic Algorithms
+	\item Hidden Markov Models
+	\item Markov Decision Process
+	\item Reinforcement Learning
+	\item Artificial Neural Networks
+	\item Evaluation Metrics
+\end{itemize}
+
+\end{document}
+

@@ -1,0 +1,67 @@
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{pgfplots}
+\usepackage[margin=1in]{geometry}
+\newcommand{\x}{\cdot}
+\newcommand{\eval}[3]{\left.#1\right\rvert_{#2}^{#3}}
+\newcommand{\nroot}[2]{\sqrt[\leftroot{-1}\uproot{1}#1]{#2}}
+\newcommand{\paren}[1]{\left(#1\right)}
+\newcommand{\braks}[1]{\left[#1\right]}
+\newcommand{\curly}[1]{\left\{#1\right\}}
+\newcommand{\norm}[1]{\lVert#1\rVert}
+\newcommand{\inner}[2]{\langle#1,#2\rangle}
+\newcommand{\argmax}[1]{\underset{#1}{\operatorname{arg\,max\,}}}
+\newcommand{\argmin}[1]{\underset{#1}{\operatorname{arg\,min\,}}}
+\DeclareMathOperator{\sgn}{\,sgn}
+
+\tikzset{
+	jumpdot/.style={mark=*,solid},
+	excl/.append style={jumpdot,fill=white},
+	incl/.append style={jumpdot,fill=blue},
+}
+
+\begin{document}
+
+\begin{center}
+	\LARGE{Kernelized SVM Hypothesis}
+\end{center}
+First, note that when transforming the features of the inputs, our definition of $\mathbf{w}$ becomes
+\begin{gather*}
+\mathbf{w} = \sum_{i=1}^{N}\alpha^{(i)}y^{(i)}\phi(\mathbf{x}^{(i)})
+\end{gather*}
+since we are still trying to find $\argmin{\mathbf{w}}\frac{1}{2}\norm{\mathbf{w}}^2$, which, when using Lagrange multipliers to include the constraints, becomes
+\begin{gather*}
+\mathcal{L}(\mathbf{w}, w_0, \alpha) = \frac{1}{2}\mathbf{w}^\top\mathbf{w} + \sum_{i=1}^{N}\alpha^{(i)}(1 - y^{(i)}(\mathbf{w}^\top\phi(\mathbf{x}^{(i)}) + w_0))
+\end{gather*}
+and when deriving this with respect to $\mathbf{w}$ and setting the derivative to $0$, we obtain
+\begin{gather*}
+\frac{\partial}{\partial\mathbf{w}}\mathcal{L} = w - \sum_{i=1}^{N}\alpha^{(i)}y^{(i)}\phi(\mathbf{x}^{(i)}) = 0 \iff \mathbf{w} = \sum_{i=1}^{N}\alpha^{(i)}y^{(i)}\phi(\mathbf{x}^{(i)})
+\end{gather*}
+We can now manipulate the hypothesis $h$ to obtain its ``kernelized" form. Let's start by substituting for $\mathbf{w}$, thus
+\begin{align*}
+h(\mathbf{x}) & = \sgn\paren{w_0 + \phi(\mathbf{x})^\top\mathbf{w}} \\
+& = \sgn\paren{w_0 + \phi(\mathbf{x})^\top\paren{\sum_{i=1}^{N}\alpha^{(i)}y^{(i)}\phi(\mathbf{x}^{(i)})}}
+\end{align*}
+Since $\phi(\mathbf{x})^\top$ is a linear map, by the property of additivity, we have
+\begin{gather*}
+h(\mathbf{x}) = \sgn\paren{w_0 + \sum_{i=1}^{N}\phi(\mathbf{x})^\top\alpha^{(i)}y^{(i)}\phi(\mathbf{x}^{(i)})}
+\end{gather*}
+Since $\alpha^{(i)}$ and $y^{(i)}$ are scalars, by the property of homogeneity, we then have
+\begin{gather*}
+h(\mathbf{x}) = \sgn\paren{w_0 + \sum_{i=1}^{N}\alpha^{(i)}y^{(i)}\phi(\mathbf{x})^\top\phi(\mathbf{x}^{(i)})}
+\end{gather*}
+Since $\phi(\mathbf{x})^\top\phi(\mathbf{x}^{(i)}) = \langle\phi(\mathbf{x}), \phi(\mathbf{x}^{(i)})\rangle$ and $\langle\phi(\mathbf{x}), \phi(\mathbf{x}^{(i)})\rangle = \langle\phi(\mathbf{x}^{(i)}), \phi(\mathbf{x})\rangle$ because ${\phi(\mathbf{x}^{(j)}) \in \mathbb{R}^D}$, we have
+\begin{align*}
+h(\mathbf{x}) & = \sgn\paren{w_0 + \sum_{i=1}^{N}\alpha^{(i)}y^{(i)}\langle\phi(\mathbf{x}), \phi(\mathbf{x}^{(i)})\rangle} \\
+& = \sgn\paren{w_0 + \sum_{i=1}^{N}\alpha^{(i)}y^{(i)}\langle\phi(\mathbf{x}^{(i)}), \phi(\mathbf{x})\rangle}
+\end{align*}
+And by the definition of the kernel function, we finally have that
+\begin{gather*}
+h(\mathbf{x}) = \sgn\paren{w_0 + \sum_{i=1}^{N}\alpha^{(i)}y^{(i)}k(\mathbf{x}^{(i)}, \mathbf{x})}
+\end{gather*}
+
+\end{document}
+
